@@ -1,0 +1,166 @@
+{
+  "data_note": "Synthetic data is used for development and demonstration.",
+  "rows": {
+    "train": 1980,
+    "validation": 424,
+    "test": 425
+  },
+  "features": [
+    "hour_float",
+    "day_of_week",
+    "is_weekend",
+    "occupancy_pct",
+    "occ_lag_30",
+    "occ_change",
+    "arrivals_30",
+    "departures_30"
+  ],
+  "regression": {
+    "30min": {
+      "models": {
+        "Linear Regression": {
+          "validation": {
+            "MAE": 6.245,
+            "RMSE": 8.333,
+            "R2": 0.9239
+          },
+          "test": {
+            "MAE": 6.422,
+            "RMSE": 8.661,
+            "R2": 0.9236
+          }
+        },
+        "Random Forest": {
+          "validation": {
+            "MAE": 5.752,
+            "RMSE": 8.038,
+            "R2": 0.9292
+          },
+          "test": {
+            "MAE": 5.64,
+            "RMSE": 7.59,
+            "R2": 0.9413
+          }
+        }
+      },
+      "baseline_no_change": {
+        "test": {
+          "MAE": 6.627,
+          "RMSE": 9.416,
+          "R2": 0.9097
+        }
+      },
+      "selected": "Random Forest"
+    },
+    "60min": {
+      "models": {
+        "Linear Regression": {
+          "validation": {
+            "MAE": 9.84,
+            "RMSE": 13.089,
+            "R2": 0.8121
+          },
+          "test": {
+            "MAE": 10.072,
+            "RMSE": 13.314,
+            "R2": 0.8194
+          }
+        },
+        "Random Forest": {
+          "validation": {
+            "MAE": 7.648,
+            "RMSE": 10.423,
+            "R2": 0.8809
+          },
+          "test": {
+            "MAE": 7.345,
+            "RMSE": 9.674,
+            "R2": 0.9047
+          }
+        }
+      },
+      "baseline_no_change": {
+        "test": {
+          "MAE": 11.004,
+          "RMSE": 15.041,
+          "R2": 0.7695
+        }
+      },
+      "selected": "Random Forest"
+    }
+  },
+  "classification": {
+    "models": {
+      "Logistic Regression": {
+        "validation": {
+          "Accuracy": 0.8042,
+          "Precision": 0.7901,
+          "Recall": 0.7914,
+          "F1": 0.7906
+        },
+        "test": {
+          "Accuracy": 0.8235,
+          "Precision": 0.798,
+          "Recall": 0.7925,
+          "F1": 0.7948
+        },
+        "confusion_matrix": [
+          [
+            191,
+            13,
+            0
+          ],
+          [
+            15,
+            84,
+            20
+          ],
+          [
+            0,
+            27,
+            75
+          ]
+        ]
+      },
+      "Random Forest": {
+        "validation": {
+          "Accuracy": 0.8231,
+          "Precision": 0.8061,
+          "Recall": 0.8073,
+          "F1": 0.8064
+        },
+        "test": {
+          "Accuracy": 0.8447,
+          "Precision": 0.8212,
+          "Recall": 0.8228,
+          "F1": 0.8218
+        },
+        "confusion_matrix": [
+          [
+            189,
+            15,
+            0
+          ],
+          [
+            10,
+            89,
+            20
+          ],
+          [
+            0,
+            21,
+            81
+          ]
+        ]
+      }
+    },
+    "selected": "Random Forest",
+    "labels": [
+      "Low",
+      "Medium",
+      "High"
+    ],
+    "rule": "Low < 40% <= Medium < 70% <= High (occupancy in 60 min)"
+  },
+  "model_version": "v20261026-0923"
+}
